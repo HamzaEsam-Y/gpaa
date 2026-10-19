@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوابة حساب المعدل التراكمي ومتابعة الفرق الدراسية | HTI CS</title>
+    <title>بوابة الـ GPA وحزمة الأدوات الأكاديمية الذكية | علوم الحاسب HTI</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -21,18 +21,21 @@
                     HTI
                 </div>
                 <div>
-                    <h1 class="text-xl font-extrabold tracking-wide">حاسبة الـ GPA ونظام التدرج الأكاديمي</h1>
+                    <h1 class="text-xl font-extrabold tracking-wide">بوابة الـ GPA والأدوات الأكاديمية الذكية</h1>
                     <p class="text-xs text-blue-200">برنامج بكالوريوس علوم الحاسب (لائحة 134 ساعة معتمدة - 2022)</p>
                 </div>
             </div>
 
             <!-- Navigation Buttons -->
-            <div class="flex items-center gap-2">
+            <div class="flex flex-wrap items-center gap-2">
                 <button onclick="switchTab('calculator')" id="tabBtn-calculator" class="px-4 py-2 rounded-lg font-bold text-sm bg-blue-600 text-white transition shadow">
-                    🧮 حاسبة الفصول والمعدل
+                    🧮 حاسبة الفصول
+                </button>
+                <button onclick="switchTab('tools')" id="tabBtn-tools" class="px-4 py-2 rounded-lg font-bold text-sm bg-slate-800 hover:bg-slate-700 text-emerald-300 transition border border-emerald-500/30">
+                    🛠️ الأدوات الذكية (5 أدوات)
                 </button>
                 <button onclick="switchTab('freshmen')" id="tabBtn-freshmen" class="px-4 py-2 rounded-lg font-bold text-sm bg-slate-800 hover:bg-slate-700 text-amber-300 transition border border-amber-500/30">
-                    📖 دليل اللائحة والإنذارات
+                    📖 دليل اللائحة
                 </button>
                 <button onclick="openAdminModal()" class="px-4 py-2 rounded-lg font-bold text-sm bg-red-600/90 hover:bg-red-700 text-white transition shadow">
                     🔒 دخول الأدمن
@@ -44,7 +47,9 @@
     <!-- Main Container -->
     <main class="max-w-7xl mx-auto px-4 py-8 flex-grow w-full space-y-6">
 
-        <!-- ================= TAB 1: CALCULATOR & YEAR PROGRESSION ================= -->
+        <!-- ========================================================================= -->
+        <!-- TAB 1: MAIN CALCULATOR & YEAR PROGRESSION                                 -->
+        <!-- ========================================================================= -->
         <div id="tab-calculator" class="space-y-6">
 
             <!-- Student Info Card -->
@@ -80,7 +85,7 @@
                 </div>
             </div>
 
-            <!-- ================= ADVANCE TO NEXT ACADEMIC YEAR ================= -->
+            <!-- Advance to Next Academic Year -->
             <div id="progressionContainer" class="bg-gradient-to-r from-blue-50 via-indigo-50 to-slate-50 border border-blue-200 rounded-3xl p-5 shadow-sm flex flex-col sm:flex-row justify-between items-center gap-4 transition-all">
                 <div class="flex items-center gap-3">
                     <div class="w-11 h-11 bg-indigo-600 text-white rounded-2xl flex items-center justify-center text-xl font-bold shadow">
@@ -93,7 +98,6 @@
                         </p>
                     </div>
                 </div>
-                <!-- Dynamic Button / Badge -->
                 <button onclick="advanceToNextYear()" id="btnAdvanceYear" class="px-6 py-2.5 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-extrabold text-xs rounded-2xl shadow-md transition flex items-center gap-2 flex-shrink-0">
                     <span id="btnAdvanceYearText">الانتقال للمرحلة التالية</span>
                     <span>⏭️</span>
@@ -103,13 +107,11 @@
                 </div>
             </div>
 
-            <!-- ================= SECTION 1: ACADEMIC STATUS / WARNING BANNER ================= -->
+            <!-- Academic Status / Warning Banner -->
             <div id="warningTrackerCard" class="rounded-3xl p-6 shadow-sm space-y-5 transition-all duration-300">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div class="flex items-center gap-3">
-                        <div id="warnIconBox" class="w-12 h-12 rounded-2xl flex items-center justify-center text-white text-2xl font-black shadow-md flex-shrink-0 transition">
-                            <!-- Injected dynamically -->
-                        </div>
+                        <div id="warnIconBox" class="w-12 h-12 rounded-2xl flex items-center justify-center text-white text-2xl font-black shadow-md flex-shrink-0 transition"></div>
                         <div>
                             <div class="flex flex-wrap items-center gap-2">
                                 <h3 id="warnTitle" class="text-lg font-black text-slate-900">جاري التحميل...</h3>
@@ -119,9 +121,6 @@
                             </div>
                             <p id="warnDesc" class="text-xs text-slate-700 mt-1 leading-relaxed"></p>
                         </div>
-                    </div>
-                    <div id="warnMaxHoursBox" class="bg-white px-4 py-2 rounded-2xl text-xs font-black shadow-sm flex-shrink-0">
-                        <span id="warnMaxHoursBadge">الحد الأقصى للتسجيل: 21 ساعة</span>
                     </div>
                 </div>
 
@@ -154,10 +153,8 @@
                 </div>
             </div>
 
-            <!-- ================= SECTION 2: THE 3 FIXED SEMESTERS + CGPA CARD ================= -->
+            <!-- The 3 Fixed Semesters + CGPA Card -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                
-                <!-- Fixed 3 Terms -->
                 <div id="termsCardsContainer" class="contents"></div>
 
                 <!-- Cumulative CGPA Card -->
@@ -182,10 +179,9 @@
                         </span>
                     </div>
                 </div>
-
             </div>
 
-            <!-- ================= SECTION 3: ACTIVE SEMESTER COURSES EDITOR ================= -->
+            <!-- Active Semester Courses Editor -->
             <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-6 space-y-4">
                 <div class="flex flex-wrap justify-between items-center gap-3 pb-3 border-b border-slate-100">
                     <div>
@@ -194,7 +190,7 @@
                             <h2 class="text-lg font-black text-slate-800" id="activeSemesterTitle">مقررات: الترم الأول</h2>
                             <span class="bg-blue-100 text-blue-800 text-[10px] px-2.5 py-0.5 rounded-full font-bold" id="activeSemesterBadge">الفصل النشط حالياً</span>
                         </div>
-                        <p class="text-xs text-slate-500 mt-1">أدخل درجاتك (أعمال سنة 40 + فاينال 60) أو اختر التقدير الحرفي مباشرة</p>
+                        <p class="text-xs text-slate-500 mt-1">ابحث عن المقرر بكوده أو اسمه (عربي أو إنجليزي)، وحدد التقدير الحرفي مباشرة</p>
                     </div>
 
                     <div class="flex items-center gap-2">
@@ -207,32 +203,25 @@
                     </div>
                 </div>
 
-                <!-- Courses Table -->
-                <div class="overflow-x-auto">
+                <!-- Simplified Table: 5 Columns -->
+                <div class="overflow-x-visible">
                     <table class="w-full text-right text-xs">
                         <thead class="bg-slate-100 text-slate-700 font-bold uppercase border-y border-slate-200">
                             <tr>
-                                <th class="p-3">كود المقرر</th>
-                                <th class="p-3">اسم المقرر</th>
-                                <th class="p-3">الساعات</th>
-                                <th class="p-3">أعمال الفصل (40)</th>
-                                <th class="p-3">النهائي (60)</th>
-                                <th class="p-3">المجموع (%)</th>
-                                <th class="p-3">التقدير الحرفي</th>
-                                <th class="p-3">إعادة مقرر؟</th>
-                                <th class="p-3 text-center">حذف</th>
+                                <th class="p-3 w-5/12">المقرر الدراسي (بحث فوري بالكود أو الاسم عربي / إنجليزي)</th>
+                                <th class="p-3 w-2/12">الساعات المعتمدة</th>
+                                <th class="p-3 w-2/12">التقدير الحرفي</th>
+                                <th class="p-3 w-2/12">إعادة مقرر؟</th>
+                                <th class="p-3 w-1/12 text-center">حذف</th>
                             </tr>
                         </thead>
-                        <tbody id="coursesTableBody" class="divide-y divide-slate-100">
-                            <!-- Injected dynamically -->
-                        </tbody>
+                        <tbody id="coursesTableBody" class="divide-y divide-slate-100"></tbody>
                     </table>
                 </div>
 
-                <!-- Save Action Buttons -->
                 <div class="flex flex-wrap gap-4 items-center justify-between border-t border-slate-100 pt-4">
                     <span class="text-xs text-slate-500 font-medium">
-                        * يتم الحساب والتحديث اللحظي لجميع الكروت والإنذارات تلقائياً بمجرد إدخال الدرجات.
+                        * يتم الحساب والتحديث اللحظي لجميع الكروت والإنذارات تلقائياً بمجرد اختيار التقدير.
                     </span>
                     <button onclick="saveStudentResult()" id="btnSaveData" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm rounded-xl shadow transition">
                         💾 حفظ السجل في قاعدة البيانات
@@ -242,7 +231,248 @@
 
         </div>
 
-        <!-- ================= TAB 2: REGULATIONS GUIDE ================= -->
+        <!-- ========================================================================= -->
+        <!-- TAB 2: SMART ACADEMIC TOOLS SUITE (الأدوات الأكاديمية الذكية الخمسة)      -->
+        <!-- ========================================================================= -->
+        <div id="tab-tools" class="hidden space-y-6">
+
+            <!-- Tools Navigation Pills -->
+            <div class="bg-white rounded-3xl p-3 border shadow-sm flex flex-wrap gap-2">
+                <button onclick="switchSubTool('target')" id="subToolBtn-target" class="px-4 py-2.5 rounded-2xl font-bold text-xs bg-indigo-600 text-white shadow">
+                    🎯 حاسبة المعدل المطلوب (Target GPA)
+                </button>
+                <button onclick="switchSubTool('probation')" id="subToolBtn-probation" class="px-4 py-2.5 rounded-2xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200">
+                    🛡️ درع الإنذار الأكاديمي
+                </button>
+                <button onclick="switchSubTool('retake')" id="subToolBtn-retake" class="px-4 py-2.5 rounded-2xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200">
+                    🔄 محاكي إعادة المواد والتحسين
+                </button>
+                <button onclick="switchSubTool('scenarios')" id="subToolBtn-scenarios" class="px-4 py-2.5 rounded-2xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200">
+                    ⚖️ السيناريو الأفضل والأسوأ
+                </button>
+                <button onclick="switchSubTool('graduation')" id="subToolBtn-graduation" class="px-4 py-2.5 rounded-2xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200">
+                    🎓 مؤشر التخرج والتدريب الصيفي
+                </button>
+            </div>
+
+            <!-- TOOL 1: TARGET GPA PLANNER -->
+            <div id="tool-target" class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200 space-y-6">
+                <div class="border-b pb-4">
+                    <span class="bg-indigo-100 text-indigo-800 text-xs px-3 py-1 rounded-full font-bold">أداة التخطيط الاستراتيجي</span>
+                    <h3 class="text-xl font-black text-slate-900 mt-2">🎯 حاسبة المعدل المطلوب للفصل الحالي (Target GPA Planner)</h3>
+                    <p class="text-xs text-slate-600 mt-1">احسب المعدل الفصلي (SGPA) الذي تحتاجه لتحقيق معدل تراكمي مستهدف بنهاية الترم طبقاً للمعادلة اللائحية.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">الساعات المكتسبة سابقاً (Hold)</label>
+                        <input type="number" id="t_oldHours" value="60" min="0" max="134" class="w-full px-3 py-2 border rounded-xl text-sm font-bold">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">المعدل التراكمي الحالي (Old CGPA)</label>
+                        <input type="number" step="0.01" id="t_oldGpa" value="2.40" min="0" max="4.0" class="w-full px-3 py-2 border rounded-xl text-sm font-bold">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">ساعات الفصل الحالي (Hnew)</label>
+                        <input type="number" id="t_newHours" value="15" min="9" max="21" class="w-full px-3 py-2 border rounded-xl text-sm font-bold">
+                        <span class="text-[10px] text-slate-400">بين 9 إلى 21 ساعة (مادة 13 و 14)</span>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">المعدل التراكمي المستهدف (Target CGPA)</label>
+                        <input type="number" step="0.01" id="t_targetGpa" value="2.70" min="0" max="4.0" class="w-full px-3 py-2 border rounded-xl text-sm font-bold text-indigo-700 bg-indigo-50/50">
+                    </div>
+                </div>
+
+                <button onclick="calculateTargetGpa()" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm rounded-xl shadow transition">
+                    ⚡ احسب المعدل الفصلي المطلوب
+                </button>
+
+                <!-- Tool 1 Result Box -->
+                <div id="targetResultBox" class="p-6 rounded-2xl border transition-all space-y-3 hidden"></div>
+            </div>
+
+            <!-- TOOL 2: ACADEMIC PROBATION SHIELD -->
+            <div id="tool-probation" class="hidden bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200 space-y-6">
+                <div class="border-b pb-4">
+                    <span class="bg-red-100 text-red-800 text-xs px-3 py-1 rounded-full font-bold">حماية البقاء وتفادي الفصل</span>
+                    <h3 class="text-xl font-black text-slate-900 mt-2">🛡️ درع الإنذار الأكاديمي وبقاء الطالب (Probation Shield)</h3>
+                    <p class="text-xs text-slate-600 mt-1">حساب الحد الأدنى من النقاط لرفع المعدل التراكمي فوق خط 2.00 لتجنب الإنذارات المتتالية (مادة 21).</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">الساعات السابقة</label>
+                        <input type="number" id="p_oldHours" value="36" min="1" max="134" class="w-full px-3 py-2 border rounded-xl text-sm font-bold">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">المعدل التراكمي الحالي (&lt; 2.00)</label>
+                        <input type="number" step="0.01" id="p_oldGpa" value="1.85" min="0" max="1.99" class="w-full px-3 py-2 border rounded-xl text-sm font-bold text-red-600 bg-red-50/50">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">ساعات الفصل الحالي</label>
+                        <input type="number" id="p_newHours" value="12" min="9" max="15" class="w-full px-3 py-2 border rounded-xl text-sm font-bold">
+                        <span class="text-[10px] text-slate-400">12 أو 15 ساعة كحد أقصى للإنذار (مادة 14)</span>
+                    </div>
+                </div>
+
+                <button onclick="calculateProbationShield()" class="px-6 py-2.5 bg-red-600 hover:bg-red-700 text-white font-extrabold text-sm rounded-xl shadow transition">
+                    🛡️ فحص خط الأمان وخطة الإنقاذ
+                </button>
+
+                <!-- Tool 2 Result Box -->
+                <div id="probationResultBox" class="p-6 rounded-2xl border transition-all space-y-3 hidden"></div>
+            </div>
+
+            <!-- TOOL 3: RETAKE & GRADE IMPROVEMENT SIMULATOR -->
+            <div id="tool-retake" class="hidden bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200 space-y-6">
+                <div class="border-b pb-4">
+                    <span class="bg-purple-100 text-purple-800 text-xs px-3 py-1 rounded-full font-bold">المادة (20) من اللائحة</span>
+                    <h3 class="text-xl font-black text-slate-900 mt-2">🔄 محاكي إعادة المواد والتحسين (Retake Simulator)</h3>
+                    <p class="text-xs text-slate-600 mt-1">تطبيق سقف الدرجات في الرسوب (أول إعادة أقصاها +B بنقاط 3.20) وحساب القفزة الدقيقة في المعدل التراكمي دون تكرار الساعات.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">الساعات المكتسبة الحالية</label>
+                        <input type="number" id="r_totalHours" value="90" min="1" max="134" class="w-full px-3 py-2 border rounded-xl text-sm font-bold">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">المعدل التراكمي الحالي</label>
+                        <input type="number" step="0.01" id="r_currentGpa" value="2.20" min="0" max="4.0" class="w-full px-3 py-2 border rounded-xl text-sm font-bold">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">ساعات المقرر المعاد</label>
+                        <select id="r_courseCredits" class="w-full px-3 py-2 border rounded-xl text-sm font-bold bg-white">
+                            <option value="3">3 ساعات (تخصصي/أساسي)</option>
+                            <option value="2">2 ساعة (إنساني)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">التقدير السابق والسبب</label>
+                        <select id="r_retakeType" class="w-full px-3 py-2 border rounded-xl text-sm font-bold bg-white">
+                            <option value="fail_1">إعادة أولى لرسوب سابق (F) - سقف +B</option>
+                            <option value="fail_2">إعادة ثانية لرسوب سابق (F) - سقف +C</option>
+                            <option value="fail_3">إعادة ثالثة لرسوب سابق (F) - سقف +D</option>
+                            <option value="improve">إعادة لتحسين التقدير (بدون سقف إذا لم يرسب)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">التقدير المتوقع الجديد</label>
+                        <select id="r_expectedGrade" class="w-full px-3 py-2 border rounded-xl text-sm font-bold text-emerald-700 bg-emerald-50/50">
+                            <option value="A+">A+ (4.0)</option>
+                            <option value="A" selected>A (3.7)</option>
+                            <option value="A-">A- (3.4)</option>
+                            <option value="B+">B+ (3.2)</option>
+                            <option value="B">B (3.0)</option>
+                            <option value="B-">B- (2.8)</option>
+                            <option value="C+">C+ (2.6)</option>
+                            <option value="C">C (2.4)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button onclick="calculateRetakeSimulator()" class="px-6 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-extrabold text-sm rounded-xl shadow transition">
+                    🔄 محاكاة أثر الإعادة على الـ CGPA
+                </button>
+
+                <!-- Tool 3 Result Box -->
+                <div id="retakeResultBox" class="p-6 rounded-2xl border transition-all space-y-3 hidden"></div>
+            </div>
+
+            <!-- TOOL 4: BEST & WORST CASE SCENARIOS -->
+            <div id="tool-scenarios" class="hidden bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200 space-y-6">
+                <div class="border-b pb-4 flex justify-between items-center">
+                    <div>
+                        <span class="bg-amber-100 text-amber-800 text-xs px-3 py-1 rounded-full font-bold">التنبؤ الاستباقي</span>
+                        <h3 class="text-xl font-black text-slate-900 mt-2">⚖️ حاسبة السيناريو الأفضل والأسوأ للفصل (Best & Worst Case)</h3>
+                        <p class="text-xs text-slate-600 mt-1">توقع 3 احتمالات لمعدلك التراكمي بنهاية الفصل: الأفضل، والأسوأ، والواقعي.</p>
+                    </div>
+                    <button onclick="addScenarioCourseRow()" class="px-4 py-2 bg-amber-50 text-amber-800 hover:bg-amber-100 font-bold text-xs rounded-xl border border-amber-200">
+                        ➕ إضافة مادة للتوقع
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">الساعات السابقة الكلية</label>
+                        <input type="number" id="sc_oldHours" value="45" min="0" max="134" class="w-full px-3 py-2 border rounded-xl text-sm font-bold">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">المعدل التراكمي السابق</label>
+                        <input type="number" step="0.01" id="sc_oldGpa" value="2.65" min="0" max="4.0" class="w-full px-3 py-2 border rounded-xl text-sm font-bold">
+                    </div>
+                </div>
+
+                <!-- Scenario Courses Table -->
+                <div class="overflow-x-auto border rounded-2xl">
+                    <table class="w-full text-right text-xs">
+                        <thead class="bg-slate-100 text-slate-700 font-bold">
+                            <tr>
+                                <th class="p-3">اسم المقرر</th>
+                                <th class="p-3">الساعات</th>
+                                <th class="p-3 text-emerald-700">التقدير المتفائل (الأفضل)</th>
+                                <th class="p-3 text-rose-700">التقدير المتشائم (الأسوأ)</th>
+                                <th class="p-3 text-center">حذف</th>
+                            </tr>
+                        </thead>
+                        <tbody id="scenarioTableBody" class="divide-y divide-slate-100"></tbody>
+                    </table>
+                </div>
+
+                <button onclick="calculateScenarios()" class="px-6 py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-extrabold text-sm rounded-xl shadow transition">
+                    ⚖️ توليد السيناريوهات الثلاثة
+                </button>
+
+                <!-- Tool 4 Result Box -->
+                <div id="scenarioResultBox" class="p-6 rounded-2xl border transition-all space-y-4 hidden"></div>
+            </div>
+
+            <!-- TOOL 5: GRADUATION & HONORS TRACKER -->
+            <div id="tool-graduation" class="hidden bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200 space-y-6">
+                <div class="border-b pb-4">
+                    <span class="bg-emerald-100 text-emerald-800 text-xs px-3 py-1 rounded-full font-bold">خريطة الطريق نحو البكالوريوس</span>
+                    <h3 class="text-xl font-black text-slate-900 mt-2">🎓 مؤشر خط التخرج والتدريب الصيفي (Graduation & Honors)</h3>
+                    <p class="text-xs text-slate-600 mt-1">تتبع استيفاء الـ 134 ساعة، وتدريب 1 وتدريب 2 (0 ساعة معتمدة)، ومشروع التخرج (مادتين متتاليتين 6 س).</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">الساعات المكتسبة الحالية</label>
+                        <input type="number" id="g_completedHours" value="70" min="0" max="134" class="w-full px-3 py-2 border rounded-xl text-sm font-bold">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">المعدل التراكمي الحالي</label>
+                        <input type="number" step="0.01" id="g_cgpa" value="3.10" min="0" max="4.0" class="w-full px-3 py-2 border rounded-xl text-sm font-bold">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">موقف التدريب الصيفي 1 (0 ساعة)</label>
+                        <select id="g_training1" class="w-full px-3 py-2 border rounded-xl text-sm font-bold bg-white">
+                            <option value="done">تم الاجتياز بنجاح ✅</option>
+                            <option value="pending" selected>لم يجتز بعد ⏳</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">موقف التدريب الصيفي 2 (0 ساعة)</label>
+                        <select id="g_training2" class="w-full px-3 py-2 border rounded-xl text-sm font-bold bg-white">
+                            <option value="done">تم الاجتياز بنجاح ✅</option>
+                            <option value="pending" selected>لم يجتز بعد ⏳</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button onclick="calculateGraduationRoadmap()" class="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm rounded-xl shadow transition">
+                    🗺️ تحليل خطة التخرج وموقف التدريب
+                </button>
+
+                <!-- Tool 5 Result Box -->
+                <div id="graduationResultBox" class="p-6 rounded-2xl border transition-all space-y-4 hidden"></div>
+            </div>
+
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- TAB 3: REGULATIONS GUIDE (الدليل الأكاديمي للائحة)                         -->
+        <!-- ========================================================================= -->
         <div id="tab-freshmen" class="hidden space-y-6">
             <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-6 md:p-8 space-y-6">
                 <div class="border-b pb-4">
@@ -255,24 +485,23 @@
                     <div class="bg-blue-50/60 border border-blue-200 rounded-2xl p-5 space-y-2">
                         <h3 class="font-bold text-blue-900 text-base">1. وزن المقررات (الساعات المعتمدة)</h3>
                         <p class="text-xs text-slate-700 leading-relaxed">
-                            • المقررات التخصصية والأساسية: <strong>3 ساعات معتمدة</strong> (ساعتين محاضرة + ساعتين تمارين/معمل).
-                            <br>• المقررات الإنسانية: <strong>ساعتان معتمدتان</strong> (ساعتين محاضرة).
+                            • المقررات التخصصية والأساسية: <strong>3 ساعات معتمدة</strong>.
+                            <br>• المقررات الإنسانية: <strong>ساعتان معتمدتان</strong>.
+                            <br>• التدريب الصيفي (1 و 2): <strong>0 ساعة معتمدة (اجتياز/لم يجتز)</strong> مدته 120 ساعة موزعة على 4 أسابيع (مادة 22).
                             <br>• إجمالي الساعات المطلوبة للتخرج هو <strong>134 ساعة معتمدة</strong> بمعدل لا يقل عن 2.00 (مادة 24).
                         </p>
                     </div>
 
                     <div class="bg-indigo-50/60 border border-indigo-200 rounded-2xl p-5 space-y-2">
-                        <h3 class="font-bold text-indigo-900 text-base">2. توزيع الدرجات (مادة 28)</h3>
+                        <h3 class="font-bold text-indigo-900 text-base">2. مشروع التخرج والتدريب</h3>
                         <p class="text-xs text-slate-700 leading-relaxed">
-                            النهاية العظمى لكل مقرر <strong>100 درجة</strong>:
-                            <br>• <strong>40 درجة:</strong> أعمال الفصل الدراسي (ميدتيرم، حضور، أعمال سنة).
-                            <br>• <strong>60 درجة:</strong> الامتحان النهائي (Final Exam).
-                            <br>• درجة النجاح الصغرى 50% (تقدير D-).
+                            • <strong>التدريب الصيفي:</strong> يؤدى مرتين بعد استيفاء 30 ساعة على الأقل.
+                            <br>• <strong>مشروع التخرج:</strong> يسجل بعد استيفاء 70% على الأقل من الساعات (94 ساعة)، كمقررين متتاليين (مشروع 1 ومشروع 2) مدة كل منهما 3 ساعات (مادة 23).
                         </p>
                     </div>
 
                     <div class="bg-emerald-50/60 border border-emerald-200 rounded-2xl p-5 space-y-2">
-                        <h3 class="font-bold text-emerald-900 text-base">3. حدود الساعات المسموحة (مادة 14)</h3>
+                        <h3 class="font-bold text-emerald-900 text-base">3. الساعات المسموح بتسجيلها (مادة 14)</h3>
                         <p class="text-xs text-slate-700 leading-relaxed">
                             • معدل 3.00 فأكثر ⬅️ حتى <strong>21 ساعة</strong>.
                             <br>• معدل من 2.00 إلى 2.99 ⬅️ حتى <strong>18 ساعة</strong>.
@@ -316,7 +545,9 @@
             </div>
         </div>
 
-        <!-- ================= TAB 3: ADMIN DASHBOARD (Protected) ================= -->
+        <!-- ========================================================================= -->
+        <!-- TAB 4: ADMIN DASHBOARD (Protected)                                        -->
+        <!-- ========================================================================= -->
         <div id="tab-admin" class="hidden space-y-6">
             <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-6 space-y-6">
                 <div class="flex flex-wrap justify-between items-center gap-4 border-b pb-4">
@@ -345,7 +576,7 @@
                         <span id="admAvgGpa" class="text-2xl font-black text-blue-900 mt-1 block">0.00</span>
                     </div>
                     <div class="bg-red-50 border border-red-100 rounded-2xl p-4 text-center">
-                        <span class="text-xs font-bold text-red-600">طلاب تحت الإنذار (< 2.0)</span>
+                        <span class="text-xs font-bold text-red-600">طلاب تحت الإنذار (&lt; 2.0)</span>
                         <span id="admWarningCount" class="text-2xl font-black text-red-700 mt-1 block">0</span>
                     </div>
                     <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-4 text-center">
@@ -366,7 +597,7 @@
                     </select>
                     <select id="adminWarningFilter" onchange="filterAdminTable()" class="px-3 py-2 border rounded-xl text-sm bg-white font-medium">
                         <option value="all">جميع الحالات الأكاديمية</option>
-                        <option value="warning">تحت الإنذار الأكاديمي فقط (< 2.0)</option>
+                        <option value="warning">تحت الإنذار الأكاديمي فقط (&lt; 2.0)</option>
                         <option value="good">وضع أكاديمي منتظم (≥ 2.0)</option>
                     </select>
                 </div>
@@ -387,9 +618,7 @@
                                 <th class="p-3 text-center">إجراءات</th>
                             </tr>
                         </thead>
-                        <tbody id="adminTableBody" class="divide-y divide-slate-100 bg-white">
-                            <!-- Injected by Admin JS -->
-                        </tbody>
+                        <tbody id="adminTableBody" class="divide-y divide-slate-100 bg-white"></tbody>
                     </table>
                 </div>
             </div>
@@ -397,7 +626,7 @@
 
     </main>
 
-    <!-- ================= ADMIN LOGIN MODAL ================= -->
+    <!-- Admin Login Modal -->
     <div id="adminLoginModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4 border border-slate-100">
             <div class="flex justify-between items-center border-b pb-2">
@@ -426,55 +655,78 @@
     <script>
         // Official HTI Grading Scale (Article 12)
         const GRADING_SCALE = [
-            { min: 96, grade: 'A+', points: 4.0 },
-            { min: 92, grade: 'A',  points: 3.7 },
-            { min: 88, grade: 'A-', points: 3.4 },
-            { min: 84, grade: 'B+', points: 3.2 },
-            { min: 80, grade: 'B',  points: 3.0 },
-            { min: 76, grade: 'B-', points: 2.8 },
-            { min: 72, grade: 'C+', points: 2.6 },
-            { min: 68, grade: 'C',  points: 2.4 },
-            { min: 64, grade: 'C-', points: 2.2 },
-            { min: 60, grade: 'D+', points: 2.0 },
-            { min: 55, grade: 'D',  points: 1.5 },
-            { min: 50, grade: 'D-', points: 1.0 },
-            { min: 0,  grade: 'F',  points: 0.0 }
+            { grade: 'A+', points: 4.0 },
+            { grade: 'A',  points: 3.7 },
+            { grade: 'A-', points: 3.4 },
+            { grade: 'B+', points: 3.2 },
+            { grade: 'B',  points: 3.0 },
+            { grade: 'B-', points: 2.8 },
+            { grade: 'C+', points: 2.6 },
+            { grade: 'C',  points: 2.4 },
+            { grade: 'C-', points: 2.2 },
+            { grade: 'D+', points: 2.0 },
+            { grade: 'D',  points: 1.5 },
+            { grade: 'D-', points: 1.0 },
+            { grade: 'F',  points: 0.0 }
+        ];
+
+        // Comprehensive Database of Official HTI CS Courses
+        const OFFICIAL_COURSES = [
+            { code: 'H 101', nameAr: 'مهارات تواصل', nameEn: 'Communication Skills', credits: 2 },
+            { code: 'BS 101', nameAr: 'التفاضل والتكامل', nameEn: 'Calculus', credits: 3 },
+            { code: 'CS 101', nameAr: 'مقدمة في علوم الحاسب', nameEn: 'Intro to Computer Science', credits: 3 },
+            { code: 'H 102', nameAr: 'اللغة الإنجليزية', nameEn: 'English Language', credits: 2 },
+            { code: 'BS 102', nameAr: 'الجبر الخطي', nameEn: 'Linear Algebra', credits: 3 },
+            { code: 'CS 102', nameAr: 'برمجة الحاسبات', nameEn: 'Computers Programming', credits: 3 },
+            { code: 'H 103', nameAr: 'إدارة أعمال', nameEn: 'Business Administration', credits: 2 },
+            { code: 'BS 103', nameAr: 'الرياضيات غير المتصلة', nameEn: 'Discrete Mathematics', credits: 3 },
+            { code: 'CS 103', nameAr: 'البرمجة الشيئية', nameEn: 'Object-Oriented Programming (OOP)', credits: 3 },
+            { code: 'BS 104', nameAr: 'الكترونيات', nameEn: 'Electronics', credits: 3 },
+            { code: 'CS 104', nameAr: 'مقدمة نظم المعلومات', nameEn: 'Introduction to Information Systems', credits: 3 },
+            { code: 'BS 105', nameAr: 'إحصاء واحتمالات', nameEn: 'Statistics and Probabilities', credits: 3 },
+            { code: 'BS 202', nameAr: 'فيزياء', nameEn: 'Physics', credits: 3 },
+            { code: 'H 201', nameAr: 'أخلاقيات العمل', nameEn: 'Work Ethics', credits: 2 },
+            { code: 'BS 201', nameAr: 'بحوث العمليات', nameEn: 'Operations Research', credits: 3 },
+            { code: 'CS 201', nameAr: 'هياكل البيانات', nameEn: 'Data Structures', credits: 3 },
+            { code: 'H 202', nameAr: 'حقوق الإنسان', nameEn: 'Human Rights', credits: 2 },
+            { code: 'CS 202', nameAr: 'تحليل وتصميم النظم', nameEn: 'Systems Analysis and Design', credits: 3 },
+            { code: 'H 203', nameAr: 'كتابة تقارير فنية', nameEn: 'Technical Report Writing', credits: 2 },
+            { code: 'CS 203', nameAr: 'معالجة الملفات', nameEn: 'File Processing', credits: 3 },
+            { code: 'H 204', nameAr: 'ضبط وتوكيد الجودة', nameEn: 'Quality Assurance & Control', credits: 2 },
+            { code: 'CS 204', nameAr: 'مقدمة في قواعد البيانات', nameEn: 'Introduction to Databases', credits: 3 },
+            { code: 'CS 205', nameAr: 'أساسيات الوسائط المتعددة', nameEn: 'Fundamentals of Multimedia', credits: 3 },
+            { code: 'CS 301', nameAr: 'لغة التجميع', nameEn: 'Assembly Language', credits: 3 },
+            { code: 'CS 302', nameAr: 'برمجة الويب', nameEn: 'Web Programming', credits: 3 },
+            { code: 'CS 303', nameAr: 'البرمجة المنطقية', nameEn: 'Logic Programming (Prolog)', credits: 3 },
+            { code: 'CS 304', nameAr: 'تحليل الخوارزميات', nameEn: 'Analysis of Algorithms', credits: 3 },
+            { code: 'CS 305', nameAr: 'هندسة البرمجيات', nameEn: 'Software Engineering', credits: 3 },
+            { code: 'CS 306', nameAr: 'بناء الحاسب', nameEn: 'Computer Architecture', credits: 3 },
+            { code: 'CS 307', nameAr: 'نظرية وتصميم المترجمات', nameEn: 'Theory and Design of Compilers', credits: 3 },
+            { code: 'CS 308', nameAr: 'الرسم بالحاسب', nameEn: 'Computer Graphics', credits: 3 },
+            { code: 'CS 309', nameAr: 'تطوير تطبيقات الجوال', nameEn: 'Mobile App Development', credits: 3 },
+            { code: 'CS 310', nameAr: 'شبكات الحاسب', nameEn: 'Computer Networks', credits: 3 },
+            { code: 'CS 401', nameAr: 'اللغات الديناميكية', nameEn: 'Dynamic Languages', credits: 3 },
+            { code: 'CS 402', nameAr: 'معالجة الصور الرقمية', nameEn: 'Digital Image Processing', credits: 3 },
+            { code: 'CS 403', nameAr: 'الذكاء الاصطناعي', nameEn: 'Artificial Intelligence (AI)', credits: 3 },
+            { code: 'CS 404', nameAr: 'نظريات نظم التشغيل', nameEn: 'Theory of Operating Systems', credits: 3 },
+            { code: 'CS 498', nameAr: 'مشروع التخرج 1', nameEn: 'Senior Project 1', credits: 3 },
+            { code: 'CS 499', nameAr: 'مشروع التخرج 2', nameEn: 'Senior Project 2', credits: 3 },
+            { code: 'CS 320', nameAr: 'تعلم الآلة', nameEn: 'Machine Learning', credits: 3 },
+            { code: 'CS 332', nameAr: 'مستودعات البيانات', nameEn: 'Data Warehouses', credits: 3 },
+            { code: 'CS 340', nameAr: 'أمن الشبكات', nameEn: 'Network Security', credits: 3 },
+            { code: 'CS 341', nameAr: 'إنترنت الأشياء', nameEn: 'Internet of Things (IoT)', credits: 3 },
+            { code: 'CS 445', nameAr: 'الحوسبة السحابية', nameEn: 'Cloud Computing', credits: 3 }
         ];
 
         // Fixed 3 Semesters Per Academic Year
         let semesters = [
-            {
-                id: 'term_1',
-                name: 'الترم الأول',
-                hours: 0,
-                points: 0.0,
-                gpa: 0.00,
-                isSummer: false,
-                courses: []
-            },
-            {
-                id: 'term_2',
-                name: 'الترم الثاني',
-                hours: 0,
-                points: 0.0,
-                gpa: 0.00,
-                isSummer: false,
-                courses: []
-            },
-            {
-                id: 'term_summer_1',
-                name: 'الترم الصيفي (3)',
-                hours: 0,
-                points: 0.0,
-                gpa: 0.00,
-                isSummer: true,
-                courses: []
-            }
+            { id: 'term_1', name: 'الترم الأول', hours: 0, points: 0.0, gpa: 0.00, isSummer: false, courses: [] },
+            { id: 'term_2', name: 'الترم الثاني', hours: 0, points: 0.0, gpa: 0.00, isSummer: false, courses: [] },
+            { id: 'term_summer_1', name: 'الترم الصيفي (3)', hours: 0, points: 0.0, gpa: 0.00, isSummer: true, courses: [] }
         ];
 
         let prevAccumulatedHours = 0;
         let prevAccumulatedPoints = 0;
-
         let activeSemesterId = 'term_1';
         let adminRecords = [];
 
@@ -483,27 +735,451 @@
             loadActiveSemesterCourses();
             checkBatchProgressionButton();
             recalculateAll();
+
+            // Default scenario rows for Tool 4
+            initScenarioRows();
+
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.c-search-box')) {
+                    document.querySelectorAll('.ac-dropdown').forEach(d => d.classList.add('hidden'));
+                }
+            });
         });
 
-        // Tab Switching
+        // Tab Navigation
         function switchTab(tab) {
             document.getElementById('tab-calculator').classList.toggle('hidden', tab !== 'calculator');
+            document.getElementById('tab-tools').classList.toggle('hidden', tab !== 'tools');
             document.getElementById('tab-freshmen').classList.toggle('hidden', tab !== 'freshmen');
             document.getElementById('tab-admin').classList.toggle('hidden', tab !== 'admin');
 
             const btnCalc = document.getElementById('tabBtn-calculator');
+            const btnTools = document.getElementById('tabBtn-tools');
             const btnFresh = document.getElementById('tabBtn-freshmen');
 
-            if (tab === 'calculator') {
-                btnCalc.className = "px-4 py-2 rounded-lg font-bold text-sm bg-blue-600 text-white shadow";
-                btnFresh.className = "px-4 py-2 rounded-lg font-bold text-sm bg-slate-800 text-amber-300 border border-amber-500/30";
-            } else if (tab === 'freshmen') {
-                btnFresh.className = "px-4 py-2 rounded-lg font-bold text-sm bg-amber-600 text-white shadow";
-                btnCalc.className = "px-4 py-2 rounded-lg font-bold text-sm bg-slate-800 text-white";
+            btnCalc.className = tab === 'calculator' ? "px-4 py-2 rounded-lg font-bold text-sm bg-blue-600 text-white shadow" : "px-4 py-2 rounded-lg font-bold text-sm bg-slate-800 text-white";
+            btnTools.className = tab === 'tools' ? "px-4 py-2 rounded-lg font-bold text-sm bg-emerald-600 text-white shadow" : "px-4 py-2 rounded-lg font-bold text-sm bg-slate-800 text-emerald-300 border border-emerald-500/30";
+            btnFresh.className = tab === 'freshmen' ? "px-4 py-2 rounded-lg font-bold text-sm bg-amber-600 text-white shadow" : "px-4 py-2 rounded-lg font-bold text-sm bg-slate-800 text-amber-300 border border-amber-500/30";
+        }
+
+        // Sub-tool switcher
+        function switchSubTool(tool) {
+            const tools = ['target', 'probation', 'retake', 'scenarios', 'graduation'];
+            tools.forEach(t => {
+                document.getElementById(`tool-${t}`).classList.toggle('hidden', t !== tool);
+                const btn = document.getElementById(`subToolBtn-${t}`);
+                if (t === tool) {
+                    btn.className = "px-4 py-2.5 rounded-2xl font-bold text-xs bg-indigo-600 text-white shadow";
+                } else {
+                    btn.className = "px-4 py-2.5 rounded-2xl font-bold text-xs bg-slate-100 text-slate-700 hover:bg-slate-200";
+                }
+            });
+        }
+
+        // =========================================================================
+        // TOOL 1: TARGET GPA PLANNER (معالجة الحدود والسيناريو المطلوب بدقة)
+        // =========================================================================
+        function calculateTargetGpa() {
+            const Hold = parseFloat(document.getElementById('t_oldHours').value) || 0;
+            const OldCGPA = parseFloat(document.getElementById('t_oldGpa').value) || 0;
+            const Hnew = parseFloat(document.getElementById('t_newHours').value) || 0;
+            const TargetCGPA = parseFloat(document.getElementById('t_targetGpa').value) || 0;
+            const resBox = document.getElementById('targetResultBox');
+
+            if (Hnew <= 0) {
+                alert("يرجى إدخال ساعات صالحة للفصل الحالي (9 ساعات على الأقل).");
+                return;
+            }
+
+            // Formula: Required SGPA = [ (TargetCGPA * (Hold + Hnew)) - (OldCGPA * Hold) ] / Hnew
+            const totalHours = Hold + Hnew;
+            const totalPointsNeeded = TargetCGPA * totalHours;
+            const oldPoints = OldCGPA * Hold;
+            const neededPointsThisTerm = totalPointsNeeded - oldPoints;
+            const requiredSGPA = neededPointsThisTerm / Hnew;
+
+            // Maximum possible CGPA if student gets a perfect 4.0 this term:
+            const maxReachableCGPA = ((OldCGPA * Hold) + (4.0 * Hnew)) / totalHours;
+
+            resBox.classList.remove('hidden');
+
+            if (requiredSGPA > 4.0) {
+                // Edge Case: Mathematically Impossible in one term
+                resBox.className = "p-6 rounded-2xl border-2 border-red-300 bg-red-50 text-slate-800 space-y-3";
+                resBox.innerHTML = `
+                    <div class="flex items-center gap-2 text-red-700 font-black text-sm">
+                        <span>⚠️</span> تنبيه: هدف غير ممكن رياضياً في فصل واحد
+                    </div>
+                    <p class="text-xs text-red-900 leading-relaxed font-bold">
+                        عفواً، الوصول لهذا المعدل المستهدف مستحيل رياضياً في فصل واحد!
+                        المعدل الفصلي المطلوب سيكون (<span class="underline">${requiredSGPA.toFixed(2)}</span>) وهو أعلى من السقف الأكاديمي (4.00).
+                    </p>
+                    <div class="bg-white p-4 rounded-xl border border-red-200">
+                        <span class="text-xs font-extrabold text-slate-700 block">أقصى معدل تراكمي يمكنك الوصول إليه هذا الفصل بحصولك على 4.0 هو:</span>
+                        <span class="text-2xl font-black text-indigo-700 mt-1 block">${maxReachableCGPA.toFixed(2)}</span>
+                    </div>
+                    <p class="text-[11px] text-slate-500">نصيحة: يمكنك توزيع خطة رفع المعدل على فصلين دراسيين لتحقيق هذا الهدف براحة تامة.</p>
+                `;
+            } else if (requiredSGPA <= 0) {
+                resBox.className = "p-6 rounded-2xl border-2 border-emerald-300 bg-emerald-50 text-slate-800 space-y-2";
+                resBox.innerHTML = `
+                    <div class="flex items-center gap-2 text-emerald-800 font-black text-sm">
+                        <span>🎉</span> تهانينا!
+                    </div>
+                    <p class="text-xs text-emerald-900 leading-relaxed">
+                        معدلك الحالي (${OldCGPA.toFixed(2)}) يحقق بالفعل أو يتجاوز المعدل المستهدف (${TargetCGPA.toFixed(2)}). أي نجاح بسيط في مواد هذا الترم سيبقيك في القمة.
+                    </p>
+                `;
+            } else {
+                // Achievable Target
+                resBox.className = "p-6 rounded-2xl border-2 border-indigo-300 bg-indigo-50/70 text-slate-800 space-y-3";
+                resBox.innerHTML = `
+                    <div class="flex items-center justify-between border-b border-indigo-200 pb-2">
+                        <span class="text-xs font-black text-indigo-900">المعدل الفصلي المطلوب تحقيقه هذا الترم (Required SGPA):</span>
+                        <span class="text-3xl font-black text-indigo-700 font-mono">${requiredSGPA.toFixed(2)}</span>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <div class="bg-white p-3 rounded-xl border border-indigo-100">
+                            <span class="text-slate-500 block">إجمالي النقاط الفصلية المطلوبة:</span>
+                            <span class="text-base font-black text-slate-800">${neededPointsThisTerm.toFixed(1)} نقطة</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-indigo-100">
+                            <span class="text-slate-500 block">توصية التقديرات المقترحة:</span>
+                            <span class="text-xs font-bold text-indigo-800 mt-1 block">
+                                ${requiredSGPA >= 3.7 ? 'الحصول على تقديرات A و +A في أغلب المقررات' : (requiredSGPA >= 3.0 ? 'الحصول على تقديرات B و +B كمتوسط' : 'الحصول على تقديرات C و +C تكفي للهدف')}
+                            </span>
+                        </div>
+                    </div>
+                `;
             }
         }
 
-        // ================= YEAR PROGRESSION ENGINE (تم تصحيح القراءة والتحديث التلقائي) =================
+        // =========================================================================
+        // TOOL 2: ACADEMIC PROBATION SHIELD (درع الإنذار وبقاء الطالب)
+        // =========================================================================
+        function calculateProbationShield() {
+            const Hold = parseFloat(document.getElementById('p_oldHours').value) || 0;
+            const OldCGPA = parseFloat(document.getElementById('p_oldGpa').value) || 0;
+            const Hnew = parseFloat(document.getElementById('p_newHours').value) || 0;
+            const resBox = document.getElementById('probationResultBox');
+
+            const totalHours = Hold + Hnew;
+            const safetyPointsNeeded = (2.00 * totalHours) - (OldCGPA * Hold);
+            const reqTermGpa = safetyPointsNeeded / Hnew;
+
+            resBox.classList.remove('hidden');
+
+            if (reqTermGpa > 4.0) {
+                resBox.className = "p-6 rounded-2xl border-2 border-red-400 bg-red-50 text-slate-900 space-y-3";
+                resBox.innerHTML = `
+                    <div class="flex items-center gap-2 text-red-700 font-black text-base">
+                        <span>🚨</span> خطة إنقاذ عاجلة (الخروج من الإنذار يحتاج استراتيجية إعادة)
+                    </div>
+                    <p class="text-xs text-red-800 leading-relaxed font-semibold">
+                        الوصول إلى 2.00 من خلال دراسة مواد جديدة فقط يتطلب معدلاً فصلياً (${reqTermGpa.toFixed(2)}) وهو مستحيل في فصل واحد.
+                    </p>
+                    <div class="bg-white p-4 rounded-xl border border-red-200">
+                        <h5 class="font-extrabold text-xs text-red-900 mb-1">الاستراتيجية الإلزامية طبقاً للائحة:</h5>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            <strong>إعادة مواد الرسوب (F) فوراً:</strong> إعادة مادة كنت راسباً فيها يرفع المعدل التراكمي بقفزات هائلة لأنها تستبدل الـ 0 بنقاط تصل إلى 3.20 دون إضافة ساعات عبء جديدة.
+                        </p>
+                    </div>
+                `;
+            } else {
+                resBox.className = "p-6 rounded-2xl border-2 border-amber-300 bg-amber-50/70 text-slate-900 space-y-3";
+                resBox.innerHTML = `
+                    <div class="flex justify-between items-center border-b border-amber-200 pb-2">
+                        <span class="text-xs font-black text-amber-900">الحد الأدنى للمعدل الفصلي لرفع الإنذار (تخطي 2.00):</span>
+                        <span class="text-3xl font-black text-amber-800 font-mono">${reqTermGpa.toFixed(2)}</span>
+                    </div>
+                    <p class="text-xs text-slate-700 leading-relaxed">
+                        تحتاج إلى جمع ما لا يقل عن <strong>${safetyPointsNeeded.toFixed(1)} نقطة</strong> هذا الفصل للوصول بمعدلك التراكمي إلى <strong>2.00</strong> وتفادي تسجيل أي إنذار إضافي في سجلك.
+                    </p>
+                    <div class="bg-white p-4 rounded-xl border border-amber-200 text-xs">
+                        <h5 class="font-bold text-slate-800 mb-1">خطة التقديرات المطلوبة:</h5>
+                        <p class="text-slate-600">
+                            يجب ألا يقل تقديرك في أي مادة مسجلة عن <strong>${reqTermGpa <= 2.2 ? 'C (مقبول مرتفع)' : (reqTermGpa <= 2.6 ? '+C (جيد)' : 'B (جيد جداً)')}</strong>، والتركيز الأكبر على المواد ذات الـ 3 ساعات لأن وزنها أعلى.
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+        // =========================================================================
+        // TOOL 3: RETAKE & GRADE IMPROVEMENT SIMULATOR (المادة 20 وسقف الرسوب)
+        // =========================================================================
+        function calculateRetakeSimulator() {
+            const totalHours = parseFloat(document.getElementById('r_totalHours').value) || 0;
+            const currentGpa = parseFloat(document.getElementById('r_currentGpa').value) || 0;
+            const courseCredits = parseFloat(document.getElementById('r_courseCredits').value) || 3;
+            const retakeType = document.getElementById('r_retakeType').value;
+            const expectedGrade = document.getElementById('r_expectedGrade').value;
+            const resBox = document.getElementById('retakeResultBox');
+
+            let rawPoints = GRADING_SCALE.find(g => g.grade === expectedGrade)?.points || 0;
+            let effectivePoints = rawPoints;
+            let capNote = "";
+
+            // Apply Article 20 caps
+            if (retakeType === 'fail_1') {
+                if (effectivePoints > 3.20) {
+                    effectivePoints = 3.20;
+                    capNote = "تم تطبيق سقف المادة (20-أ): الحد الأقصى للإعادة الأولى بعد الرسوب هو +B (3.20 نقطة).";
+                }
+            } else if (retakeType === 'fail_2') {
+                if (effectivePoints > 2.60) {
+                    effectivePoints = 2.60;
+                    capNote = "تم تطبيق سقف المادة (20-أ): الحد الأقصى للإعادة الثانية بعد الرسوب هو +C (2.60 نقطة).";
+                }
+            } else if (retakeType === 'fail_3') {
+                if (effectivePoints > 2.00) {
+                    effectivePoints = 2.00;
+                    capNote = "تم تطبيق سقف المادة (20-أ): الحد الأقصى لأي إعادة تالية بعد الرسوب هو +D (2.00 نقطة).";
+                }
+            }
+
+            const oldCoursePoints = 0; // Failure was 0
+            const newCoursePoints = effectivePoints * courseCredits;
+            const deltaPoints = newCoursePoints - oldCoursePoints;
+
+            const currentTotalPoints = currentGpa * totalHours;
+            const newTotalPoints = currentTotalPoints + deltaPoints;
+            const newCgpa = newTotalPoints / totalHours; // Hours not doubled!
+
+            resBox.classList.remove('hidden');
+            resBox.className = "p-6 rounded-2xl border-2 border-purple-300 bg-purple-50/70 text-slate-800 space-y-3";
+            resBox.innerHTML = `
+                <div class="flex justify-between items-center border-b border-purple-200 pb-2">
+                    <div>
+                        <span class="text-xs text-slate-500 block">المعدل التراكمي الجديد بعد الإعادة:</span>
+                        <span class="text-3xl font-black text-purple-900 font-mono">${newCgpa.toFixed(2)}</span>
+                    </div>
+                    <div class="text-left">
+                        <span class="text-xs bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full font-bold">
+                            زيادة فورية +${(newCgpa - currentGpa).toFixed(2)}
+                        </span>
+                    </div>
+                </div>
+                ${capNote ? `<div class="text-xs bg-amber-100 text-amber-900 p-2.5 rounded-xl font-bold flex items-center gap-1"><span>⚠️</span> ${capNote}</div>` : ''}
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                    <div class="bg-white p-3 rounded-xl border border-purple-100">
+                        <span class="text-slate-500 block">النقاط المكتسبة من المادة:</span>
+                        <span class="font-black text-purple-900">${newCoursePoints.toFixed(1)} نقطة</span>
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-purple-100">
+                        <span class="text-slate-500 block">ساعات التخرج:</span>
+                        <span class="font-black text-slate-800">تبقى ${totalHours} س (استبدال دون تكرار)</span>
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-purple-100">
+                        <span class="text-slate-500 block">المعدل السابق:</span>
+                        <span class="font-black text-slate-600">${currentGpa.toFixed(2)}</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        // =========================================================================
+        // TOOL 4: BEST & WORST SCENARIOS (السيناريوهات الثلاثة)
+        // =========================================================================
+        function initScenarioRows() {
+            const tbody = document.getElementById('scenarioTableBody');
+            tbody.innerHTML = '';
+            const sample = [
+                { name: 'مقرر تخصصي 1', credits: 3, best: 'A', worst: 'B' },
+                { name: 'مقرر تخصصي 2', credits: 3, best: 'A+', worst: 'B-' },
+                { name: 'مقرر تخصصي 3', credits: 3, best: 'B+', worst: 'C' },
+                { name: 'مقرر إنساني 1', credits: 2, best: 'A', worst: 'B' },
+                { name: 'مقرر تخصصي 4', credits: 3, best: 'B', worst: 'D+' }
+            ];
+            sample.forEach(s => addScenarioCourseRow(s.name, s.credits, s.best, s.worst));
+        }
+
+        function addScenarioCourseRow(name = 'مقرر دراسي', credits = 3, best = 'A', worst = 'B') {
+            const tbody = document.getElementById('scenarioTableBody');
+            const tr = document.createElement('tr');
+            tr.className = "border-b hover:bg-slate-50";
+
+            let gradeOpts = GRADING_SCALE.map(g => `<option value="${g.grade}">${g.grade} (${g.points})</option>`).join('');
+
+            tr.innerHTML = `
+                <td class="p-3">
+                    <input type="text" value="${name}" class="sc-name w-full px-2 py-1.5 border rounded-lg text-xs font-semibold">
+                </td>
+                <td class="p-3">
+                    <select class="sc-credits px-2 py-1.5 border rounded-lg text-xs font-bold bg-white">
+                        <option value="3" ${credits == 3 ? 'selected' : ''}>3 ساعات</option>
+                        <option value="2" ${credits == 2 ? 'selected' : ''}>2 ساعة</option>
+                    </select>
+                </td>
+                <td class="p-3">
+                    <select class="sc-best px-2 py-1.5 border border-emerald-300 rounded-lg text-xs font-bold bg-emerald-50 text-emerald-800">
+                        ${gradeOpts}
+                    </select>
+                </td>
+                <td class="p-3">
+                    <select class="sc-worst px-2 py-1.5 border border-rose-300 rounded-lg text-xs font-bold bg-rose-50 text-rose-800">
+                        ${gradeOpts}
+                    </select>
+                </td>
+                <td class="p-3 text-center">
+                    <button onclick="this.closest('tr').remove()" class="text-red-500 font-black text-sm">✕</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+            tr.querySelector('.sc-best').value = best;
+            tr.querySelector('.sc-worst').value = worst;
+        }
+
+        function calculateScenarios() {
+            const Hold = parseFloat(document.getElementById('sc_oldHours').value) || 0;
+            const OldCGPA = parseFloat(document.getElementById('sc_oldGpa').value) || 0;
+            const rows = document.querySelectorAll('#scenarioTableBody tr');
+            const resBox = document.getElementById('scenarioResultBox');
+
+            if (rows.length === 0) {
+                alert("يرجى إضافة المقررات أولاً!");
+                return;
+            }
+
+            let termHours = 0;
+            let bestPoints = 0;
+            let worstPoints = 0;
+
+            rows.forEach(r => {
+                const credits = parseFloat(r.querySelector('.sc-credits').value) || 3;
+                const bGrade = r.querySelector('.sc-best').value;
+                const wGrade = r.querySelector('.sc-worst').value;
+
+                const bPts = GRADING_SCALE.find(g => g.grade === bGrade)?.points || 0;
+                const wPts = GRADING_SCALE.find(g => g.grade === wGrade)?.points || 0;
+
+                termHours += credits;
+                bestPoints += (bPts * credits);
+                worstPoints += (wPts * credits);
+            });
+
+            const totalHours = Hold + termHours;
+            const oldTotalPoints = OldCGPA * Hold;
+
+            const bestCGPA = (oldTotalPoints + bestPoints) / totalHours;
+            const worstCGPA = (oldTotalPoints + worstPoints) / totalHours;
+            const realisticCGPA = (bestCGPA + worstCGPA) / 2;
+
+            resBox.classList.remove('hidden');
+            resBox.className = "p-6 rounded-2xl border-2 border-amber-300 bg-amber-50/60 text-slate-900 space-y-4";
+            resBox.innerHTML = `
+                <h4 class="font-black text-sm text-slate-800">📊 الاحتمالات الثلاثة لمعدلك التراكمي (CGPA) بنهاية الفصل:</h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white p-4 rounded-2xl border-2 border-emerald-400 text-center shadow-sm">
+                        <span class="text-xs font-bold text-emerald-700 block">🌟 السيناريو الأفضل (Best Case)</span>
+                        <span class="text-3xl font-black text-emerald-800 mt-1 block">${bestCGPA.toFixed(2)}</span>
+                        <span class="text-[11px] text-slate-400 mt-1 block">لو حصلت على أعلى التوقعات</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl border-2 border-blue-400 text-center shadow-sm">
+                        <span class="text-xs font-bold text-blue-700 block">⚖️ السيناريو الواقعي (Realistic)</span>
+                        <span class="text-3xl font-black text-blue-900 mt-1 block">${realisticCGPA.toFixed(2)}</span>
+                        <span class="text-[11px] text-slate-400 mt-1 block">متوسط الأداء المرجح</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl border-2 border-rose-400 text-center shadow-sm">
+                        <span class="text-xs font-bold text-rose-700 block">⚠️ السيناريو الأسوأ (Worst Case)</span>
+                        <span class="text-3xl font-black text-rose-800 mt-1 block">${worstCGPA.toFixed(2)}</span>
+                        <span class="text-[11px] text-slate-400 mt-1 block">${worstCGPA < 2.0 ? '🚨 خطر النزول تحت الإنذار!' : 'آمن فوق خط 2.00'}</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        // =========================================================================
+        // TOOL 5: GRADUATION & HONORS TRACKER (134 ساعة والتدريب الصيفي 0 ساعة)
+        // =========================================================================
+        function calculateGraduationRoadmap() {
+            const completed = parseFloat(document.getElementById('g_completedHours').value) || 0;
+            const cgpa = parseFloat(document.getElementById('g_cgpa').value) || 0;
+            const t1 = document.getElementById('g_training1').value;
+            const t2 = document.getElementById('g_training2').value;
+            const resBox = document.getElementById('graduationResultBox');
+
+            const remainingHours = Math.max(0, 134 - completed);
+            const percent = Math.min(100, Math.round((completed / 134) * 100));
+
+            // Senior Project: Article 23 requires >= 70% of 134 = 93.8 ≈ 94 hours
+            const projectEligible = completed >= 94;
+            const hoursUntilProject = Math.max(0, 94 - completed);
+
+            // Training 1 & 2: Article 22 requires >= 30 hours
+            const trainingEligible = completed >= 30;
+
+            // Max hours per term based on CGPA (Article 14)
+            let maxHoursTerm = 18;
+            if (cgpa >= 3.00) maxHoursTerm = 21;
+            else if (cgpa >= 2.00) maxHoursTerm = 18;
+            else if (cgpa >= 1.00) maxHoursTerm = 15;
+            else maxHoursTerm = 12;
+
+            const estimatedSemesters = Math.ceil(remainingHours / maxHoursTerm);
+
+            resBox.classList.remove('hidden');
+            resBox.className = "p-6 rounded-2xl border-2 border-emerald-300 bg-emerald-50/70 text-slate-900 space-y-4";
+            resBox.innerHTML = `
+                <div class="flex flex-wrap justify-between items-center border-b border-emerald-200 pb-3 gap-2">
+                    <div>
+                        <span class="text-xs text-slate-600 font-bold">الساعات المتبقية للتخرج:</span>
+                        <span class="text-2xl font-black text-emerald-900">${remainingHours} ساعة</span>
+                        <span class="text-xs text-slate-400 mr-1">(من أصل 134 ساعة)</span>
+                    </div>
+                    <div class="text-left">
+                        <span class="text-xs font-bold text-slate-600 block">الفصول التقريبية المتبقية:</span>
+                        <span class="text-xl font-black text-indigo-700">${estimatedSemesters} فصول دراسية</span>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div>
+                    <div class="flex justify-between text-xs font-bold text-slate-700 mb-1">
+                        <span>نسبة إنجاز متطلبات التخرج: ${percent}%</span>
+                        <span>${completed} / 134 ساعة</span>
+                    </div>
+                    <div class="w-full bg-white rounded-full h-3.5 border overflow-hidden">
+                        <div class="bg-emerald-500 h-full transition-all duration-700" style="width: ${percent}%"></div>
+                    </div>
+                </div>
+
+                <!-- Milestone Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-2">
+                        <h5 class="font-black text-slate-800 flex items-center gap-1.5">
+                            <span>🏖️</span> موقف التدريب الصيفي (مادة 22 - زيرو يونت 0 س):
+                        </h5>
+                        <p class="text-slate-600">
+                            ${!trainingEligible ? '❌ لم تستوفِ شرط 30 ساعة للتسجيل في التدريب الصيفي بعد.' : '✅ استوفيت شرط 30 ساعة ويحق لك أداء التدريب الصيفي.'}
+                        </p>
+                        <div class="flex gap-2 mt-1">
+                            <span class="px-2.5 py-1 rounded-lg font-bold ${t1 === 'done' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+                                تدريب 1 (120 س): ${t1 === 'done' ? 'مجتاز ✅' : 'متبقي ⏳'}
+                            </span>
+                            <span class="px-2.5 py-1 rounded-lg font-bold ${t2 === 'done' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+                                تدريب 2 (120 س): ${t2 === 'done' ? 'مجتاز ✅' : 'متبقي ⏳'}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 space-y-2">
+                        <h5 class="font-black text-slate-800 flex items-center gap-1.5">
+                            <span>💻</span> مشروع التخرج (مادة 23 - شرط 70% = 94 ساعة):
+                        </h5>
+                        <p class="text-slate-600">
+                            ${projectEligible 
+                                ? '🎉 أنت مؤهل الآن لتسجيل مشروع التخرج 1 (CS 498) ثم مشروع التخرج 2 (CS 499) بإجمالي 6 ساعات معتمدة.' 
+                                : `⏳ متبقي لك <strong>${hoursUntilProject} ساعة معتمدة</strong> للوصول لنسبة 70% وبدء تسجيل مشروع التخرج.`}
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // =========================================================================
+        // MAIN CALCULATOR LOGIC (YEAR PROGRESSION + AUTOCOMPLETE SEARCH)
+        // =========================================================================
         function checkBatchProgressionButton() {
             const batchSelect = document.getElementById('studentBatch');
             if (!batchSelect) return;
@@ -515,7 +1191,6 @@
             const subtext = document.getElementById('progressionSubtext');
 
             if (currentBatch.includes('الرابعة')) {
-                // Graduation Year
                 if (btnAdvance) btnAdvance.classList.add('hidden');
                 if (gradBadge) gradBadge.classList.remove('hidden');
                 if (heading) heading.textContent = "أنت الآن في سنة التخرج (الفرقة الرابعة) 🎓";
@@ -526,13 +1201,9 @@
                 if (heading) heading.textContent = "خلصت السنة الدراسية الحالية؟";
 
                 let target = "الفرقة الثانية";
-                if (currentBatch.includes('الأولى')) {
-                    target = "الفرقة الثانية";
-                } else if (currentBatch.includes('الثانية')) {
-                    target = "الفرقة الثالثة";
-                } else if (currentBatch.includes('الثالثة')) {
-                    target = "الفرقة الرابعة";
-                }
+                if (currentBatch.includes('الأولى')) target = "الفرقة الثانية";
+                else if (currentBatch.includes('الثانية')) target = "الفرقة الثالثة";
+                else if (currentBatch.includes('الثالثة')) target = "الفرقة الرابعة";
 
                 if (subtext) {
                     subtext.innerHTML = `اضغط على الزر لترحيل ساعاتك ومعدلك التراكمي والانتقال تلقائياً إلى <strong class="text-indigo-700 font-black">${target}</strong>.`;
@@ -551,35 +1222,24 @@
             if (currentBatch.includes('الأولى')) nextBatch = 'الفرقة الثانية';
             else if (currentBatch.includes('الثانية')) nextBatch = 'الفرقة الثالثة';
             else if (currentBatch.includes('الثالثة')) nextBatch = 'الفرقة الرابعة';
-            else {
-                alert("أنت بالفعل في الفرقة الرابعة (سنة التخرج)!");
-                return;
-            }
+            else return;
 
             const confirmMsg = `هل أنت متأكد من إنهاء السنة الحالية (${currentBatch}) والانتقال إلى (${nextBatch})؟\n\n✅ سيتم حفظ وتثبيت ساعاتك ومعدلك التراكمي المحقق.\n✅ سيتم تجهيز فصول السنة الجديدة (${nextBatch}) لبدء تسجيل مقرراتها.`;
-            if (!confirm(confirmMsg)) {
-                return;
-            }
+            if (!confirm(confirmMsg)) return;
 
-            // 1. Accumulate current year's points & hours into history
             semesters.forEach(sem => {
                 prevAccumulatedHours += sem.hours;
                 prevAccumulatedPoints += sem.points;
             });
 
-            // 2. Advance Batch Dropdown
             batchSelect.value = nextBatch;
 
-            // 3. Advance Academic Year string if pattern matches (e.g. 2024 / 2025 -> 2025 / 2026)
             const acadInput = document.getElementById('academicYear');
             const matchYears = acadInput.value.match(/(\d{4})\s*\/\s*(\d{4})/);
             if (matchYears) {
-                const y1 = parseInt(matchYears[1]) + 1;
-                const y2 = parseInt(matchYears[2]) + 1;
-                acadInput.value = `${y1} / ${y2}`;
+                acadInput.value = `${parseInt(matchYears[1]) + 1} / ${parseInt(matchYears[2]) + 1}`;
             }
 
-            // 4. Reset Semester Courses for the new year
             semesters.forEach(sem => {
                 sem.hours = 0;
                 sem.points = 0;
@@ -588,8 +1248,6 @@
             });
 
             activeSemesterId = 'term_1';
-
-            // 5. Update UI
             renderSemesterCards();
             loadActiveSemesterCourses();
             checkBatchProgressionButton();
@@ -598,7 +1256,6 @@
             alert(`🎉 تم بنجاح ترحيل سجلك والانتقال إلى (${nextBatch})!\nيمكنك الآن البدء في تسجيل مقررات السنة الجديدة.`);
         }
 
-        // Render Semester Cards
         function renderSemesterCards() {
             const container = document.getElementById('termsCardsContainer');
             container.innerHTML = '';
@@ -657,17 +1314,13 @@
             tbody.innerHTML = '';
 
             if (currentSem.courses.length === 0) {
-                for (let i = 0; i < 4; i++) {
-                    addCourseRow();
-                }
+                for (let i = 0; i < 4; i++) addCourseRow();
             } else {
-                currentSem.courses.forEach(c => {
-                    addCourseRow(c.code, c.name, c.credits, c.work, c.final, c.grade, c.retake);
-                });
+                currentSem.courses.forEach(c => addCourseRow(c.courseDisplay, c.credits, c.grade, c.retake));
             }
         }
 
-        function addCourseRow(code = '', name = '', credits = 3, work = '', final = '', grade = '', retake = 'none') {
+        function addCourseRow(courseDisplay = '', credits = 3, grade = '', retake = 'none') {
             const tbody = document.getElementById('coursesTableBody');
             const rowId = 'row_' + Math.random().toString(36).substr(2, 9);
             const tr = document.createElement('tr');
@@ -675,30 +1328,24 @@
             tr.className = "hover:bg-slate-50 transition border-b border-slate-100";
 
             tr.innerHTML = `
-                <td class="p-2">
-                    <input type="text" value="${code}" placeholder="CS 101" oninput="onCourseDataChange()" class="c-code w-20 px-2 py-1.5 border rounded-lg text-xs font-mono font-bold">
+                <td class="p-3">
+                    <div class="relative c-search-box">
+                        <input type="text" value="${courseDisplay}" placeholder="ابحث بكود المادة أو اسمها (مثال: CS 101 أو هياكل أو Java)..." 
+                               oninput="handleCourseInput(this, '${rowId}')" 
+                               onfocus="handleCourseInput(this, '${rowId}')" 
+                               class="c-search w-full px-3 py-2 border rounded-xl text-xs font-semibold focus:ring-2 focus:ring-blue-500 bg-white">
+                        <div id="dropdown_${rowId}" class="ac-dropdown absolute top-full right-0 left-0 bg-white border border-slate-200 rounded-xl shadow-2xl z-50 max-h-56 overflow-y-auto hidden divide-y divide-slate-100 text-xs mt-1">
+                        </div>
+                    </div>
                 </td>
-                <td class="p-2">
-                    <input type="text" value="${name}" placeholder="اسم المقرر" oninput="onCourseDataChange()" class="c-name w-full px-2 py-1.5 border rounded-lg text-xs">
-                </td>
-                <td class="p-2">
-                    <select onchange="onCourseDataChange()" class="c-credits px-2 py-1.5 border rounded-lg text-xs font-bold bg-white">
+                <td class="p-3">
+                    <select onchange="onCourseDataChange()" class="c-credits w-full px-3 py-2 border rounded-xl text-xs font-bold bg-white cursor-pointer">
                         <option value="3" ${credits == 3 ? 'selected' : ''}>3 ساعات (تخصصي)</option>
                         <option value="2" ${credits == 2 ? 'selected' : ''}>2 ساعة (إنساني)</option>
-                        <option value="1" ${credits == 1 ? 'selected' : ''}>1 ساعة</option>
                     </select>
                 </td>
-                <td class="p-2">
-                    <input type="number" min="0" max="40" value="${work !== undefined ? work : ''}" placeholder="0-40" oninput="updateRowScore('${rowId}')" class="c-work w-16 px-2 py-1.5 border rounded-lg text-xs text-center font-bold">
-                </td>
-                <td class="p-2">
-                    <input type="number" min="0" max="60" value="${final !== undefined ? final : ''}" placeholder="0-60" oninput="updateRowScore('${rowId}')" class="c-final w-16 px-2 py-1.5 border rounded-lg text-xs text-center font-bold">
-                </td>
-                <td class="p-2">
-                    <span class="c-total font-black text-slate-700 text-xs block text-center">-</span>
-                </td>
-                <td class="p-2">
-                    <select class="c-grade px-2 py-1.5 border rounded-lg text-xs font-black bg-white" onchange="onGradeSelect('${rowId}')">
+                <td class="p-3">
+                    <select class="c-grade w-full px-3 py-2 border rounded-xl text-xs font-black bg-white cursor-pointer" onchange="onCourseDataChange()">
                         <option value="">اختر التقدير</option>
                         <option value="A+" ${grade === 'A+' ? 'selected' : ''}>A+ (4.0)</option>
                         <option value="A" ${grade === 'A' ? 'selected' : ''}>A (3.7)</option>
@@ -717,23 +1364,69 @@
                         <option value="I" ${grade === 'I' ? 'selected' : ''}>I (غير مكتمل)</option>
                     </select>
                 </td>
-                <td class="p-2">
-                    <select onchange="onCourseDataChange()" class="c-retake px-2 py-1.5 border rounded-lg text-[11px] bg-white">
+                <td class="p-3">
+                    <select onchange="onCourseDataChange()" class="c-retake w-full px-3 py-2 border rounded-xl text-[11px] bg-white cursor-pointer">
                         <option value="none" ${retake === 'none' ? 'selected' : ''}>مقرر جديد</option>
                         <option value="retake_1" ${retake === 'retake_1' ? 'selected' : ''}>إعادة أولى (أقصى تقدير B+)</option>
                         <option value="retake_2" ${retake === 'retake_2' ? 'selected' : ''}>إعادة ثانية (أقصى تقدير C+)</option>
                         <option value="retake_3" ${retake === 'retake_3' ? 'selected' : ''}>إعادة ثالثة (أقصى تقدير D+)</option>
                     </select>
                 </td>
-                <td class="p-2 text-center">
-                    <button onclick="removeCourseRow('${rowId}')" class="text-red-500 hover:text-red-700 font-bold text-sm px-2 py-1 rounded">✕</button>
+                <td class="p-3 text-center">
+                    <button onclick="removeCourseRow('${rowId}')" class="text-red-500 hover:text-red-700 font-black text-sm px-2.5 py-1 rounded-lg hover:bg-red-50 transition">✕</button>
                 </td>
             `;
             tbody.appendChild(tr);
+        }
 
-            if (work !== '' || final !== '') {
-                updateRowScore(rowId);
+        function handleCourseInput(input, rowId) {
+            const query = input.value.trim().toLowerCase();
+            const dropdown = document.getElementById(`dropdown_${rowId}`);
+            
+            const matches = OFFICIAL_COURSES.filter(c => 
+                c.code.toLowerCase().includes(query) ||
+                c.nameAr.toLowerCase().includes(query) ||
+                c.nameEn.toLowerCase().includes(query)
+            );
+
+            dropdown.innerHTML = '';
+            if (matches.length === 0) {
+                dropdown.classList.add('hidden');
+                return;
             }
+
+            matches.slice(0, 10).forEach(c => {
+                const item = document.createElement('div');
+                item.className = "p-2.5 hover:bg-blue-50 cursor-pointer flex justify-between items-center transition";
+                item.innerHTML = `
+                    <div>
+                        <span class="font-mono font-bold text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded text-[11px]">${c.code}</span>
+                        <span class="font-bold text-slate-800 mr-1.5">${c.nameAr}</span>
+                        <span class="text-[10px] text-slate-400 block">${c.nameEn}</span>
+                    </div>
+                    <span class="text-[11px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-bold">${c.credits} س</span>
+                `;
+                item.onclick = () => selectCourseFor(rowId, c);
+                dropdown.appendChild(item);
+            });
+
+            dropdown.classList.remove('hidden');
+            onCourseDataChange();
+        }
+
+        function selectCourseFor(rowId, course) {
+            const row = document.getElementById(rowId);
+            if (!row) return;
+
+            const input = row.querySelector('.c-search');
+            const creditsSelect = row.querySelector('.c-credits');
+            const dropdown = document.getElementById(`dropdown_${rowId}`);
+
+            input.value = `${course.code} - ${course.nameAr}`;
+            creditsSelect.value = course.credits;
+
+            dropdown.classList.add('hidden');
+            onCourseDataChange();
         }
 
         function removeCourseRow(id) {
@@ -744,34 +1437,6 @@
 
         function clearCurrentCourses() {
             document.getElementById('coursesTableBody').innerHTML = '';
-            onCourseDataChange();
-        }
-
-        function updateRowScore(rowId) {
-            const row = document.getElementById(rowId);
-            const workVal = parseFloat(row.querySelector('.c-work').value);
-            const finalVal = parseFloat(row.querySelector('.c-final').value);
-
-            if (!isNaN(workVal) || !isNaN(finalVal)) {
-                const total = Math.min(100, Math.max(0, (isNaN(workVal) ? 0 : workVal) + (isNaN(finalVal) ? 0 : finalVal)));
-                row.querySelector('.c-total').textContent = total;
-
-                for (let item of GRADING_SCALE) {
-                    if (total >= item.min) {
-                        row.querySelector('.c-grade').value = item.grade;
-                        break;
-                    }
-                }
-            }
-            onCourseDataChange();
-        }
-
-        function onGradeSelect(rowId) {
-            const row = document.getElementById(rowId);
-            const grade = row.querySelector('.c-grade').value;
-            if (grade === 'W' || grade === 'I') {
-                row.querySelector('.c-total').textContent = grade;
-            }
             onCourseDataChange();
         }
 
@@ -789,23 +1454,19 @@
             let parsed = [];
 
             rows.forEach(row => {
-                const code = row.querySelector('.c-code').value.trim();
-                const name = row.querySelector('.c-name').value.trim();
+                const courseDisplay = row.querySelector('.c-search').value.trim();
                 const credits = parseInt(row.querySelector('.c-credits').value) || 3;
-                const work = row.querySelector('.c-work').value;
-                const final = row.querySelector('.c-final').value;
                 const grade = row.querySelector('.c-grade').value;
                 const retake = row.querySelector('.c-retake').value;
 
-                if (code || name || grade) {
-                    parsed.push({ code, name, credits, work, final, grade, retake });
+                if (courseDisplay || grade) {
+                    parsed.push({ courseDisplay, credits, grade, retake });
                 }
             });
 
             currentSem.courses = parsed;
         }
 
-        // ================= MASTER RECALCULATE ENGINE =================
         function recalculateAll() {
             let currentYearPoints = 0;
             let currentYearHours = 0;
@@ -895,17 +1556,9 @@
             const iconBox = document.getElementById('warnIconBox');
             const warnTitle = document.getElementById('warnTitle');
             const warnCountBadge = document.getElementById('warnCountBadge');
-            const maxHoursBox = document.getElementById('warnMaxHoursBox');
-            const maxHoursBadge = document.getElementById('warnMaxHoursBadge');
             const warnDesc = document.getElementById('warnDesc');
             const ratio = document.getElementById('warnProgressRatio');
             const divider = document.getElementById('warnDivider');
-
-            let maxHours = 18;
-            if (cgpa >= 3.00) maxHours = 21;
-            else if (cgpa >= 2.00) maxHours = 18;
-            else if (cgpa >= 1.00) maxHours = 15;
-            else maxHours = 12;
 
             if (activeWarnings === 0) {
                 card.className = "bg-emerald-50/80 border border-emerald-200 rounded-3xl p-6 shadow-sm space-y-5 transition-all duration-300";
@@ -918,12 +1571,9 @@
                 warnCountBadge.textContent = "مجموع الإنذارات المتراكمة : 0";
                 warnCountBadge.className = "bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs px-3 py-0.5 rounded-full font-bold";
 
-                maxHoursBox.className = "bg-white border-2 border-emerald-300 text-emerald-700 px-4 py-2 rounded-2xl text-xs font-black shadow-sm flex-shrink-0";
-                maxHoursBadge.textContent = (cgpa >= 3.00) ? `الحد الأقصى للتسجيل: ${maxHours} ساعة (أقصى حد تفوق ⭐)` : `الحد الأقصى للتسجيل: ${maxHours} ساعة`;
-
                 warnDesc.textContent = totalCumulativeHours === 0 
-                    ? "أدخل المقررات والدرجات لعرض حساب المعدل التراكمي وموقف التسجيل والإنذارات الأكاديمية."
-                    : `المعدل التراكمي (${cgpa.toFixed(2)}) في النطاق الآمن (أعلى من 2.00). وضعك الأكاديمي سليم وممتاز، ولا توجد أي إنذارات مسجلة في سجلك وفقاً للمادة 21 من اللائحة. يحق لك تسجيل حتى ${maxHours} ساعة معتمدة في الفصل القادم.`;
+                    ? "اختر المقررات والتقديرات لعرض حساب المعدل التراكمي والإنذارات الأكاديمية."
+                    : `المعدل التراكمي (${cgpa.toFixed(2)}) في النطاق الآمن (أعلى من 2.00). وضعك الأكاديمي سليم وممتاز، ولا توجد أي إنذارات مسجلة في سجلك وفقاً للمادة 21 من اللائحة.`;
 
                 ratio.textContent = "0 / 4";
                 ratio.className = "text-emerald-700 font-black text-sm";
@@ -944,10 +1594,7 @@
                 warnCountBadge.textContent = `مجموع الإنذارات المتراكمة : ${activeWarnings}`;
                 warnCountBadge.className = "bg-red-100 text-red-700 border border-red-300 text-xs px-3 py-0.5 rounded-full font-bold";
 
-                maxHoursBox.className = "bg-white border-2 border-red-300 text-red-700 px-4 py-2 rounded-2xl text-xs font-black shadow-sm flex-shrink-0";
-                maxHoursBadge.textContent = `الحد الأقصى للتسجيل: ${maxHours} ساعة فقط`;
-
-                warnDesc.textContent = `المعدل التراكمي (${cgpa.toFixed(2)}) أقل من 2.00. تم تسجيل هذا الإنذار وتجميعه في سجلك الأكاديمي. وفقاً للمادة 21 والمادة 14 من اللائحة، يمنح الطالب إنذاراً أكاديمياً ويحدد الحد الأقصى لساعات تسجيلك بـ ${maxHours} ساعة لتجنب الفصل بعد 4 إنذارات متتالية.`;
+                warnDesc.textContent = `المعدل التراكمي (${cgpa.toFixed(2)}) أقل من 2.00. تم تسجيل هذا الإنذار وتجميعه في سجلك الأكاديمي وفقاً للمادة 21 من اللائحة لتجنب الفصل بعد 4 إنذارات متتالية.`;
 
                 ratio.textContent = `${activeWarnings} / 4`;
                 ratio.className = "text-red-600 font-black text-sm";
@@ -1158,9 +1805,7 @@
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 const data = await res.json();
-                if (data.success) {
-                    fetchAdminData();
-                }
+                if (data.success) fetchAdminData();
             } catch (err) {
                 alert("فشل حذف السجل");
             }
